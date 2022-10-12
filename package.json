@@ -1,7 +1,8 @@
 {
-  "name": "git-filesystem",
-  "version": "0.0.0",
   "private": true,
+  "version": "0.0.0",
+  "name": "git-filesystem",
+  "prettier": "@tobysmith568/prettier-config",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
@@ -25,6 +26,8 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.1.0",
+    "@tobysmith568/eslint-config": "^1.0.2",
+    "@tobysmith568/prettier-config": "^2.0.0",
     "@tsconfig/docusaurus": "^1.0.5",
     "typescript": "^4.7.4"
   },
