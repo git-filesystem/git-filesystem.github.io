@@ -9,8 +9,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "My Site",
-  tagline: "Dinosaurs are cool",
+  title: "Git-FileSystem",
+  tagline: "Read & write to GitHub/GitLab/Bitbucket repositories like they're file systems.",
   url: "https://your-docusaurus-test-site.com",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -40,7 +40,8 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/"
+            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          remarkPlugins: [[require("@docusaurus/remark-plugin-npm2yarn"), { sync: true }]]
         },
         blog: false,
         theme: {
@@ -54,22 +55,23 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "My Site",
+        title: "Git-FileSystem",
         logo: {
-          alt: "My Site Logo",
+          alt: "Git-FileSystem Logo",
           src: "img/logo.svg"
         },
         items: [
           {
             type: "doc",
-            docId: "intro",
+            docId: "/category/typescript",
             position: "left",
-            label: "Tutorial"
+            label: "TypeScript"
           },
           {
-            href: "https://github.com/facebook/docusaurus",
-            label: "GitHub",
-            position: "right"
+            href: "https://github.com/git-filesystem",
+            position: "right",
+            className: "header-github-link",
+            "aria-label": "GitHub repository"
           }
         ]
       },

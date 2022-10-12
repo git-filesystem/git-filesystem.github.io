@@ -1,0 +1,82 @@
+---
+title: Client
+sidebar_position: 2
+---
+
+Once you have a client from a [client factory](./client-factory),
+you can query the provider/user combination for repositories they have access to.
+
+### `createRepository`
+
+The `createRepository` method has the following TypeScript signature:
+
+```ts
+createRepository(name: string, isPrivate: boolean, description: string): Promise<Repository>;
+```
+
+How and where the description is used varies between providers.
+
+### `getAllRepositories`
+
+The `getAllRepositories` method returns a list of repositories that the previously supplied access token can access.
+
+Note that sorting and the maximum number of results may vary between providers.
+For example, the GitHub implementation is limited to 100 repositories and is sorted by how recently the repositories have been pushed to.
+
+### `getRepository`
+
+The `getRepository` method returns a [`Repository`](./repository) instance that can be used to read & write to the files and tags within it.
+
+This method has the following two TypeScript signatures:
+
+```ts
+getRepository(name: string): Repository;
+getRepository(name: string, owner: string): Repository;
+```
+
+:::tip
+
+When using the `owner` parameter it's important to remember that the previously supplied access token needs to at least have read permissions for the repository.
+
+:::
+
+### `getReadOnlyRepository`
+
+The `getReadOnlyRepository` method functions exactly the same as the [`getRepository`](#getRepository) method above,
+however the returned type only allows you to read files from either the HEAD or from a tag.
+This is useful when you know you're dealing with an immuatable repository, for instance repositories on GitHub that are archived.
+
+This method has the following two TypeScript signatures:
+
+```ts
+getReadonlyRepository(name: string): ReadonlyRepository;
+getReadonlyRepository(name: string, owner: string): ReadonlyRepository;
+```
+
+You can pass in a value for the `owner` parameter to get a repository that belongs to a different account or organisation.
+
+### `deleteRepository`
+
+The `deleteRepository` method can be used to **permanently** delete a repository and all of the content within it.
+
+It has the following TypeScript sigature:
+
+```ts
+deleteRepository(name: string): Promise<void>;
+```
+
+:::danger
+
+Be careful with this method, calling it will result in the loss of data.
+
+:::
+
+### `doesRepositoryExist`
+
+The `doesRepositoryExist` method can be used to check is a repository exists with the given name.
+
+This method has the following TypeScript signature:
+
+```ts
+searchRepositoriesByFile(filePath: string, contentSearchString: string): Promise<string[]>;
+```

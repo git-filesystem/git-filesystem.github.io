@@ -1,0 +1,65 @@
+---
+title: Quick Usage
+sidebar_position: 3
+---
+
+To get up and running quickly, look at the following examples.
+
+:::info
+
+There are plenty of other methods exposed from the various classes that are not shown here.
+
+:::
+
+## Single Actions Per-Commit
+
+```ts
+import { ClientFactory } from "git-filesystem";
+
+const client = new ClientFactory().getClientForProvider(
+  "github", // Or "gitlab" or "bitbucket". This is the only time you need to know what provider you're dealing with
+  "username",
+  "access-token",
+  "user-agent-name"
+);
+
+const repository = client.getRepository("repository-name");
+
+const filePath = "file/path.txt";
+
+await repository.createFile(filePath, "file content"); // This creates a commit
+
+let fileContent = await repository.readFile(filePath);
+fileContent += "\n\nNewData";
+
+await repository.updateFile(filePath, fileContent); // This creates a commit
+
+await repository.deleteFile(filePath); // This creates a commit
+```
+
+## Multiple Actions Per-Commit
+
+```ts
+import { ClientFactory } from "git-filesystem";
+
+const client = new ClientFactory().getClientForProvider(
+  "github", // Or "gitlab" or "bitbucket". This is the only time you need to know what provider you're dealing with
+  "username",
+  "access-token",
+  "user-agent-name"
+);
+
+const repository = client.getRepository("repository-name");
+
+const commitBuilder = repository.createCommitBuilder();
+
+commitBuilder.createFile("one.txt", "file content");
+
+let fileContent = await commitBuilder.readFile("two.txt");
+fileContent += "\n\nNewData";
+commitBuilder.updateFile("two.txt", fileContent);
+
+commitBuilder.deleteFile("three.txt");
+
+await commitBuilder.createCommit(); // This creates a commit that affects 3 different files
+```

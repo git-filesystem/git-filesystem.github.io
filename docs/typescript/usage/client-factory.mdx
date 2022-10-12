@@ -1,0 +1,82 @@
+---
+title: Client Factory
+sidebar_position: 1
+---
+
+The primary entrypoint into the main library is via the `ClientFactory` class.
+
+### `getClientForProvider`
+
+After importing `ClientFactory`, new one up and then call the `getClientForProvider` method.
+
+This is the only time you need to know which provider you're handling, from this point onwards the APIs are all the same.
+
+The four things you need to pass in are:
+
+- The provider of choice (`github`, `gitlab`, or `bitbucket`)
+- A username
+- A personal access token (PAT) / API key
+- A user-agent name
+
+The user agent name should represent your product/service.
+
+```ts
+import { ClientFactory } from "git-filesystem";
+
+const client = new ClientFactory().getClientForProvider(
+  "github",
+  "username",
+  "access-token",
+  "user-agent-name"
+);
+```
+
+The `getClientForProvider` method can also take other optional parameters.
+
+#### Author / Commiter
+
+The first two optional parameters are `authorDetails` and `committerDetails` respectively.
+These are both git terminology, and relate to the person(s) that the library is making commits on behalf of.
+
+Both use the following TypeScript interface:
+
+```ts
+interface GitUser {
+  name: string;
+  email: string;
+}
+```
+
+:::tip
+
+[See the git website for the difference between the two options](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History#:~:text=You%20may%20be%20wondering%20what%20the%20difference%20is%20between%20author%20and%20committer.%20The%20author%20is%20the%20person%20who%20originally%20wrote%20the%20work%2C%20whereas%20the%20committer%20is%20the%20person%20who%20last%20applied%20the%20work.),
+though you'll usually want to pass in the same details for both.
+
+:::
+
+#### Json Configuration
+
+The final optional argument is a set of JSON configuration options.
+
+The TypeScript/JavaScript libraries contain some helper methods to read/write objects to files as JSON.
+By default these methods will use pretty-printed JSON using 2 spaces, but you can use this option to change that.
+
+There are two possible types you can use for this JSON configuration (other than `null`):
+
+```ts
+type FormatJsonConfig = {
+  prettyFormat: true;
+  indentChar: " " | "\t";
+  indentSize: number; // How many of the `indentChar` to use
+};
+```
+
+or
+
+```ts
+type NoFormatJsonConfig = {
+  prettyFormat: false;
+};
+```
+
+The return type of the `getClientForProvider` method is an instance of the [client](./client) class.
