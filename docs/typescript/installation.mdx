@@ -6,6 +6,7 @@ sidebar_position: 1
 The TypeScript library is broken out into a few different npm packages.
 
 - [`git-filesystem`](https://npmjs.org/git-filesystem)
+- [`@git-filesystem/abstractions`](https://npmjs.org/@git-filesystem/abstractions)
 - [`@git-filesystem/github`](https://npmjs.org/@git-filesystem/github)
 - [`@git-filesystem/gitlab`](https://npmjs.org/@git-filesystem/gitlab)
 
@@ -13,7 +14,8 @@ All of the packages are originally written in TypeScript but are compiled down t
 
 If you only want to interact with one specific git provider, then you can install the specific package for that provider.
 
-If you want to allow your users to pick the provider of their choice, then install the main package ([`git-filesystem`](https://npmjs.org/git-filesystem)). This package uses the other packages under the hood and exposes a single API for all of them, meaning you don't need to write different code to handle different providers!
+If you want to allow your users to pick the provider of their choice, then install the main package ([`git-filesystem`](https://npmjs.org/git-filesystem)).
+This package uses the other packages under the hood and exposes a single API for all of them, meaning you don't need to write different code to handle different providers!
 
 ```bash npm2yarn
 npm install git-filesystem

@@ -1,0 +1,73 @@
+---
+title: CommitBuilder
+sidebar_position: 4
+---
+
+Use a `CommitBuilder` to apply multiple changes to different files using a single commit.
+
+The `CommitBuilder` exposes methods that are very similar to the [`Repository`](./repository), with the main difference being that they're mostly synchronous.
+
+A given file path can only have one type of action (create/update/delete) applied to it per `CommitBuilder`.
+
+### `createFile()`
+
+Adds a pending creation of a file to be committed later.
+
+```ts
+commitBuilder.createFile(path: string, content: string): void;
+```
+
+### `updateFile()`
+
+Adds a pending change to a file to be committed later.
+
+```ts
+commitBuilder.updateFile(path: string, content: string): void;
+```
+
+### `readFile()`
+
+Reads the content of a file.
+
+If the file **does** a pending creation or update on the current `CommitBuilder` then the file content will be read directly from the `CommitBuilder`.
+
+If the file will **not** be created or updated using the current `CommitBuilder` then the file content will be read from the remote repository.
+
+```ts
+commitBuilder.readFile(path: string): Promise<string>;
+commitBuilder.readFile(path: string, tagName: string): Promise<string>;
+```
+
+### `deleteFile()`
+
+Adds a pending deletion of a file to be committed later.
+
+```ts
+commitBuilder.deleteFile(path: string): void;
+```
+
+### `createCommit()`
+
+Applies the configured changes in a single commit to the remote repository.
+
+Once `createCommit` has been called, the `CommitBuilder` should not be used any further.
+
+```ts
+commitBuilder.createCommit(commitMessage: string): Promise<string>;
+```
+
+### JSON Helper Methods
+
+Just like on the [`Repository`](./repository), the create, read, and update methods also come with JSON helper-method equivalents:
+
+```ts
+await commitBuilder.createJsonFile("path/to/file.json", anyObject);
+```
+
+```ts
+const anyObject = await commitBuilder.readJsonFile<ObjectType>("path/to/file.json");
+```
+
+```ts
+await commitBuilder.updateJsonFile("path/to/file.json", anyObject);
+```

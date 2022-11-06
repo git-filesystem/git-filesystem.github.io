@@ -6,7 +6,7 @@ sidebar_position: 2
 Once you have a client from a [client factory](./client-factory),
 you can query the provider/user combination for repositories they have access to.
 
-### `createRepository`
+### `createRepository()`
 
 The `createRepository` method has the following TypeScript signature:
 
@@ -16,14 +16,14 @@ createRepository(name: string, isPrivate: boolean, description: string): Promise
 
 How and where the description is used varies between providers.
 
-### `getAllRepositories`
+### `getAllRepositories()`
 
 The `getAllRepositories` method returns a list of repositories that the previously supplied access token can access.
 
 Note that sorting and the maximum number of results may vary between providers.
 For example, the GitHub implementation is limited to 100 repositories and is sorted by how recently the repositories have been pushed to.
 
-### `getRepository`
+### `getRepository()`
 
 The `getRepository` method returns a [`Repository`](./repository) instance that can be used to read & write to the files and tags within it.
 
@@ -40,7 +40,7 @@ When using the `owner` parameter it's important to remember that the previously 
 
 :::
 
-### `getReadOnlyRepository`
+### `getReadOnlyRepository()`
 
 The `getReadOnlyRepository` method functions exactly the same as the [`getRepository`](#getRepository) method above,
 however the returned type only allows you to read files from either the HEAD or from a tag.
@@ -55,7 +55,7 @@ getReadonlyRepository(name: string, owner: string): ReadonlyRepository;
 
 You can pass in a value for the `owner` parameter to get a repository that belongs to a different account or organisation.
 
-### `deleteRepository`
+### `deleteRepository()`
 
 The `deleteRepository` method can be used to **permanently** delete a repository and all of the content within it.
 
@@ -71,7 +71,7 @@ Be careful with this method, calling it will result in the loss of data.
 
 :::
 
-### `doesRepositoryExist`
+### `doesRepositoryExist()`
 
 The `doesRepositoryExist` method can be used to check is a repository exists with the given name.
 

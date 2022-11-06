@@ -8,19 +8,19 @@ sidebar_position: 3
 When you have a repository from a [client](./client), you can read and write to the files within it.  
 The available methods include:
 
-### `createFile`
+### `createFile()`
 
 ```ts
 await repository.createFile("path/to/file.txt", "file content");
 ```
 
-### `readFile`
+### `readFile()`
 
 ```ts
 const fileContent = await repository.readFile("path/to/file.txt");
 ```
 
-### `updateFile`
+### `updateFile()`
 
 ```ts
 await repository.updateFile("path/to/file.txt", "file content");
@@ -28,12 +28,12 @@ await repository.updateFile("path/to/file.txt", "file content");
 
 :::tip
 
-The `updateFile` method requires you to pass in the whole file content, just like a tradiational file-system API.  
+The `updateFile` method requires you to pass in the whole file content, just like a traditional file-system API.  
 You cannot pass in a diff/patch/delta like you would with a Git API.
 
 :::
 
-### `deleteFile`
+### `deleteFile()`
 
 ```ts
 await repository.deleteFile("path/to/file.txt");
@@ -48,7 +48,7 @@ await repository.createJsonFile("path/to/file.json", anyObject);
 ```
 
 ```ts
-await repository.readJsonFile("path/to/file.json");
+const anyObject = await repository.readJsonFile<ObjectType>("path/to/file.json");
 ```
 
 ```ts
@@ -58,7 +58,7 @@ await repository.updateJsonFile("path/to/file.json", anyObject);
 ## Tags
 
 The repository class also exposes methods for handling tags.
-You can create tags at the current `HEAD` of the repository and then read files back from that tag at a later point.
+You can create tags at the current `HEAD` of the repository's branch and then read files back from that tag at a later point in time.
 
 ```ts
 await repository.createFile("path/to/file.txt", "original content");
@@ -69,4 +69,14 @@ await repository.updateFile("path/to/file.txt", "new content");
 
 await repository.readFile("path/to/file.txt"); // returns "new content"
 await repository.readFile("path/to/file.txt", "myTag"); // returns "original content"
+```
+
+## `createCommitBuilder()`
+
+Sometimes you might want to apply changes to multiple files using a single commit.
+To achive this, call the `createCommitBuilder()` method to get a new [`CommitBuilder`](./commitBuilder).
+See the [`CommitBuilder`](./commitBuilder) page for details on how to use it.
+
+```ts
+const commitBuilder = repository.createCommitBuilder();
 ```

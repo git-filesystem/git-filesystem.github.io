@@ -27,12 +27,12 @@ const repository = client.getRepository("repository-name");
 
 const filePath = "file/path.txt";
 
-await repository.createFile(filePath, "file content"); // This creates a commit
+await repository.createFile(filePath, "File content\n"); // This creates a commit
 
-let fileContent = await repository.readFile(filePath);
-fileContent += "\n\nNewData";
+const fileContent = await repository.readFile(filePath);
+const updatedFileContent = (fileContent += "\nNew data\n");
 
-await repository.updateFile(filePath, fileContent); // This creates a commit
+await repository.updateFile(filePath, updatedFileContent); // This creates a commit
 
 await repository.deleteFile(filePath); // This creates a commit
 ```
