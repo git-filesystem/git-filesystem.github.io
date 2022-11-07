@@ -11,7 +11,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const config = {
   title: "Git-FileSystem",
   tagline: "Read & write to GitHub/GitLab/Bitbucket repositories like they're file systems.",
-  url: "https://your-docusaurus-test-site.com",
+  url: "https://git-filesystem.github.io",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -19,8 +19,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "facebook", // Usually your GitHub org/user name.
-  projectName: "docusaurus", // Usually your repo name.
+  organizationName: "git-filesystem", // Usually your GitHub org/user name.
+  projectName: "git-filesystem", // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -39,8 +39,7 @@ const config = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          editUrl: "https://github.com/git-filesystem/git-filesystem/tree/main/",
           remarkPlugins: [[require("@docusaurus/remark-plugin-npm2yarn"), { sync: true }]]
         },
         blog: false,
@@ -79,46 +78,42 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "Docs",
+            title: "General",
             items: [
               {
-                label: "Tutorial",
-                to: "/docs/intro"
+                label: "GitHub",
+                to: "https://github.com/git-filesystem"
               }
             ]
           },
           {
-            title: "Community",
+            title: "TypeScript",
             items: [
               {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/docusaurus"
-              },
-              {
-                label: "Discord",
-                href: "https://discordapp.com/invite/docusaurus"
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/docusaurus"
-              }
-            ]
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "Blog",
-                to: "/blog"
+                label: "Docs",
+                href: "/docs/category/typescript"
               },
               {
                 label: "GitHub",
-                href: "https://github.com/facebook/docusaurus"
+                href: "https://github.com/git-filesystem/git-filesystem.js"
+              },
+              {
+                label: "npm",
+                href: "https://www.npmjs.com/package/git-filesystem"
+              }
+            ]
+          },
+          {
+            title: "C#",
+            items: [
+              {
+                label: "To-Do",
+                to: "/"
               }
             ]
           }
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`
+        copyright: `Copyright © ${new Date().getFullYear()} Git-FileSystem.`
       },
       prism: {
         theme: lightCodeTheme,
