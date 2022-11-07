@@ -13,8 +13,10 @@ export default function Home(): JSX.Element {
           <p>Read & write to GitHub/GitLab/Bitbucket repositories like they're file systems.</p>
           <p>
             Current implementations are written in{" "}
-            <Link href="./docs/category/typescript">TypeScript/JavaScript</Link> and{" "}
-            <Link href="./docs/category/dotnet">C#/.NET</Link>
+            <Link href="./docs/category/typescript">TypeScript/JavaScript</Link>
+            {/* {" "}and{" "}
+            <Link href="./docs/category/dotnet">C#/.NET</Link> */}
+            .
           </p>
         </div>
       </Main>
