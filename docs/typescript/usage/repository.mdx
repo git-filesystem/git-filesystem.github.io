@@ -5,22 +5,40 @@ sidebar_position: 3
 
 ## Files
 
-When you have a repository from a [client](./client), you can read and write to the files within it.  
+When you have a repository from a [client](./client), you can read and write to the files within it.
 The available methods include:
 
 ### `createFile()`
+
+Creates a new commit that creates a new file in the repository.
 
 ```ts
 await repository.createFile("path/to/file.txt", "file content");
 ```
 
+#### Throws:
+
+- `CommitError`: If there's an unknown error while committing.
+
+<hr />
+
 ### `readFile()`
+
+Reads a files content from the remote repository.
 
 ```ts
 const fileContent = await repository.readFile("path/to/file.txt");
 ```
 
+#### Throws:
+
+- `FileNotFoundError`: If the file does not exist.
+
+<hr />
+
 ### `updateFile()`
+
+Creates a new commit that replaces the content of a file in the repository.
 
 ```ts
 await repository.updateFile("path/to/file.txt", "file content");
@@ -28,16 +46,30 @@ await repository.updateFile("path/to/file.txt", "file content");
 
 :::tip
 
-The `updateFile` method requires you to pass in the whole file content, just like a traditional file-system API.  
+The `updateFile` method requires you to pass in the whole file content, just like a traditional file-system API.
 You cannot pass in a diff/patch/delta like you would with a Git API.
 
 :::
 
+#### Throws:
+
+- `CommitError`: If there's an unknown error while committing.
+
+<hr />
+
 ### `deleteFile()`
+
+Creates a new commit that deletes a file from the repository.
 
 ```ts
 await repository.deleteFile("path/to/file.txt");
 ```
+
+#### Throws:
+
+- `CommitError`: If there's an unknown error while committing.
+
+<hr />
 
 ### JSON Helper Methods
 
@@ -55,6 +87,8 @@ const anyObject = await repository.readJsonFile<ObjectType>("path/to/file.json")
 await repository.updateJsonFile("path/to/file.json", anyObject);
 ```
 
+<hr />
+
 ## Tags
 
 The repository class also exposes methods for handling tags.
@@ -70,6 +104,8 @@ await repository.updateFile("path/to/file.txt", "new content");
 await repository.readFile("path/to/file.txt"); // returns "new content"
 await repository.readFile("path/to/file.txt", "myTag"); // returns "original content"
 ```
+
+<hr />
 
 ## `createCommitBuilder()`
 

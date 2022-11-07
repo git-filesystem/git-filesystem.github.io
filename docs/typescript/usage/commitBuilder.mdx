@@ -17,6 +17,13 @@ Adds a pending creation of a file to be committed later.
 commitBuilder.createFile(path: string, content: string): void;
 ```
 
+#### Throws:
+
+- `AlreadyCommittedError`: If `createCommit()` has already been called.
+- `MultipleFileActionsError`: If the given file path is already set to be created, updated, or deleted.
+
+<hr />
+
 ### `updateFile()`
 
 Adds a pending change to a file to be committed later.
@@ -24,6 +31,13 @@ Adds a pending change to a file to be committed later.
 ```ts
 commitBuilder.updateFile(path: string, content: string): void;
 ```
+
+#### Throws:
+
+- `AlreadyCommittedError`: If `createCommit()` has already been called.
+- `MultipleFileActionsError`: If the given file path is already set to be created, updated, or deleted.
+
+<hr />
 
 ### `readFile()`
 
@@ -38,6 +52,13 @@ commitBuilder.readFile(path: string): Promise<string>;
 commitBuilder.readFile(path: string, tagName: string): Promise<string>;
 ```
 
+#### Throws:
+
+- `AlreadyCommittedError`: If `createCommit()` has already been called.
+- `FileNotFoundError`: If the file does not exist.
+
+<hr />
+
 ### `deleteFile()`
 
 Adds a pending deletion of a file to be committed later.
@@ -45,6 +66,13 @@ Adds a pending deletion of a file to be committed later.
 ```ts
 commitBuilder.deleteFile(path: string): void;
 ```
+
+#### Throws:
+
+- `AlreadyCommittedError`: If `createCommit()` has already been called.
+- `MultipleFileActionsError`: If the given file path is already set to be created, updated, or deleted.
+
+<hr />
 
 ### `createCommit()`
 
@@ -55,6 +83,14 @@ Once `createCommit` has been called, the `CommitBuilder` should not be used any 
 ```ts
 commitBuilder.createCommit(commitMessage: string): Promise<string>;
 ```
+
+#### Throws:
+
+- `AlreadyCommittedError`: If `createCommit()` has already been called.
+- `EmptyCommitError`: If you call `createCommit()` without creating, updating, or deleting a file.
+- `CommitError`: If there's an unknown error while committing.
+
+<hr />
 
 ### JSON Helper Methods
 

@@ -11,10 +11,16 @@ you can query the provider/user combination for repositories they have access to
 The `createRepository` method has the following TypeScript signature:
 
 ```ts
-createRepository(name: string, isPrivate: boolean, description: string): Promise<Repository>;
+client.createRepository(name: string, isPrivate: boolean, description: string): Promise<Repository>;
 ```
 
 How and where the description is used varies between providers.
+
+#### Throws:
+
+- `RepositoryAlreadyExistsError`: If a repository already exists with the given name.
+
+<hr />
 
 ### `getAllRepositories()`
 
@@ -23,6 +29,8 @@ The `getAllRepositories` method returns a list of repositories that the previous
 Note that sorting and the maximum number of results may vary between providers.
 For example, the GitHub implementation is limited to 100 repositories and is sorted by how recently the repositories have been pushed to.
 
+<hr />
+
 ### `getRepository()`
 
 The `getRepository` method returns a [`Repository`](./repository) instance that can be used to read & write to the files and tags within it.
@@ -30,8 +38,8 @@ The `getRepository` method returns a [`Repository`](./repository) instance that 
 This method has the following two TypeScript signatures:
 
 ```ts
-getRepository(name: string): Repository;
-getRepository(name: string, owner: string): Repository;
+client.getRepository(name: string): Repository;
+client.getRepository(name: string, owner: string): Repository;
 ```
 
 :::tip
@@ -39,6 +47,8 @@ getRepository(name: string, owner: string): Repository;
 When using the `owner` parameter it's important to remember that the previously supplied access token needs to at least have read permissions for the repository.
 
 :::
+
+<hr />
 
 ### `getReadOnlyRepository()`
 
@@ -49,11 +59,13 @@ This is useful when you know you're dealing with an immuatable repository, for i
 This method has the following two TypeScript signatures:
 
 ```ts
-getReadonlyRepository(name: string): ReadonlyRepository;
-getReadonlyRepository(name: string, owner: string): ReadonlyRepository;
+client.getReadonlyRepository(name: string): ReadonlyRepository;
+client.getReadonlyRepository(name: string, owner: string): ReadonlyRepository;
 ```
 
 You can pass in a value for the `owner` parameter to get a repository that belongs to a different account or organisation.
+
+<hr />
 
 ### `deleteRepository()`
 
@@ -62,7 +74,7 @@ The `deleteRepository` method can be used to **permanently** delete a repository
 It has the following TypeScript sigature:
 
 ```ts
-deleteRepository(name: string): Promise<void>;
+client.deleteRepository(name: string): Promise<void>;
 ```
 
 :::danger
@@ -71,6 +83,8 @@ Be careful with this method, calling it will result in the loss of data.
 
 :::
 
+<hr />
+
 ### `doesRepositoryExist()`
 
 The `doesRepositoryExist` method can be used to check is a repository exists with the given name.
@@ -78,5 +92,11 @@ The `doesRepositoryExist` method can be used to check is a repository exists wit
 This method has the following TypeScript signature:
 
 ```ts
-searchRepositoriesByFile(filePath: string, contentSearchString: string): Promise<string[]>;
+client.doesRepositoryExist(name: string): Promise<RepositoryExistence>;
 ```
+
+The return value will be one of the following string literals:
+
+- `"DoesNotExist"`
+- `"Exists"`
+- `"IsArchived"`
