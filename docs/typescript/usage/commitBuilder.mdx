@@ -17,12 +17,33 @@ Adds a pending creation of a file to be committed later.
 commitBuilder.createFile(path: string, content: string): void;
 ```
 
+:::caution
+
+Due to API limitations, the GitHub implementation treats creating and updating a file as the same.
+Creating a file that already exists will overwrite it.
+
+:::
+
 #### Throws:
 
 - `AlreadyCommittedError`: If `createCommit()` has already been called.
 - `MultipleFileActionsError`: If the given file path is already set to be created, updated, or deleted.
 
 <hr />
+
+:::tip
+
+The `updateFile` method requires you to pass in the whole file content, just like a traditional file-system API.
+You cannot pass in a diff/patch/delta like you would with a Git API.
+
+:::
+
+:::caution
+
+Due to API limitations, the GitHub implementation treats creating and updating a file as the same.
+Updating a file that does not exist will create it.
+
+:::
 
 ### `updateFile()`
 
@@ -43,7 +64,7 @@ commitBuilder.updateFile(path: string, content: string): void;
 
 Reads the content of a file.
 
-If the file **does** a pending creation or update on the current `CommitBuilder` then the file content will be read directly from the `CommitBuilder`.
+If the file **does** have a pending creation or update on the current `CommitBuilder` then the file content will be read directly from the `CommitBuilder`.
 
 If the file will **not** be created or updated using the current `CommitBuilder` then the file content will be read from the remote repository.
 

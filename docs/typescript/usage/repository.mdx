@@ -16,6 +16,13 @@ Creates a new commit that creates a new file in the repository.
 await repository.createFile("path/to/file.txt", "file content");
 ```
 
+:::caution
+
+Due to API limitations, the GitHub implementation treats creating and updating a file as the same.
+Creating a file that already exists will overwrite it.
+
+:::
+
 #### Throws:
 
 - `CommitError`: If there's an unknown error while committing.
@@ -48,6 +55,13 @@ await repository.updateFile("path/to/file.txt", "file content");
 
 The `updateFile` method requires you to pass in the whole file content, just like a traditional file-system API.
 You cannot pass in a diff/patch/delta like you would with a Git API.
+
+:::
+
+:::caution
+
+Due to API limitations, the GitHub implementation treats creating and updating a file as the same.
+Updating a file that does not exist will create it.
 
 :::
 
