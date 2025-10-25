@@ -57,7 +57,7 @@ jobs:
         run: npm run build
 
       - name: Upload Build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: Website
           path: build/
