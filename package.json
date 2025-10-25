@@ -30,10 +30,10 @@
     "@docusaurus/tsconfig": "^3.0.1",
     "@docusaurus/types": "^3.0.1",
     "@emotion/babel-plugin": "^11.10.2",
-    "@tobysmith568/eslint-config": "^1.0.5",
+    "@tobysmith568/eslint-config": "^2.0.0",
     "@tobysmith568/prettier-config": "^2.0.2",
     "@types/react": "^18.2.45",
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
     "typescript": "^5.3.3"
   },
   "browserslist": {
